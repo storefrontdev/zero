@@ -7,7 +7,13 @@ import { StorefrontContext } from '@/provider/storefront-provider';
 
 import { Cross2Icon, UpdateIcon } from '@radix-ui/react-icons';
 import { motion, AnimatePresence } from 'framer-motion';
+import dynamic from 'next/dynamic';
 
+const CartButton = dynamic(() => import('@/app/components/cart/cart-button'), 
+{
+  loading: () => <p>Loading...</p>,
+   ssr: false 
+});
 
 
 const Cart = () => {
@@ -128,6 +134,7 @@ const Cart = () => {
                 </div>
                 <div className="flex flex-col w-full pb-5">
                   <div className="mt-5 flex flex-col w-full items-center">
+                    <CartButton customClass="flex w-full px-8 py-5 rounded-sm bg-red-600 text-white shadow-sm" customText="Go to Checkout" />
                     <button type="button" onClick={() => clearCart().then(getCart())} className="mt-3 cursor-pointer">Clear Cart</button>
                   </div>
                 </div>
